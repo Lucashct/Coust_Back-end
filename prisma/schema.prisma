@@ -28,7 +28,7 @@ model Bill {
   ammount Float
   dueDate DateTime
   user User @relation(fields: [idUser], references: [id])
-  idUser String @unique
+  idUser String
   entries Entrie[]
 
   @@map("bills")
@@ -40,7 +40,7 @@ model Card {
   dueDate Int
   limit Float
   user User @relation(fields: [idUser], references: [id])
-  idUser String @unique
+  idUser String
   @@map("cards")
 }
 
@@ -49,7 +49,7 @@ model Entrie {
   value Float
   dueDate DateTime
   bill Bill @relation(fields: [idBill], references: [id])
-  idBill String @unique
+  idBill String
 
   @@map("entries")
 }
