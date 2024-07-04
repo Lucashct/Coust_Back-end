@@ -12,14 +12,15 @@ export class CardsController {
         dueDate,
         user
       } = req.body
-      
-      await createCard({ name, limit, dueDate, user });
+
+      await createCard({ name, limit: parseFloat(limit), dueDate, idUser: user.id });
       
       const cardsList = await listCards(user);
 
       return res.status(201)
       .json(new ResponseObject(StatusResponse.SUCCESS, 'Cartão criado com sucesso!', cardsList, null));
     } catch(error) {
+      console.log(error);
       return res.status(500)
       .json(new ResponseObject(StatusResponse.ERROR, 'Erro ao se comunicar com o servidor', null, null));
     }
