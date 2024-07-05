@@ -15,3 +15,13 @@ export const listCards = async (data: any) => {
 
   return cards;
 }
+
+export const removeCard = async (data:any) => {
+  const card = await prisma.card.delete({
+    where:{
+      id: data.id
+    }
+  });
+
+  return card;
+}

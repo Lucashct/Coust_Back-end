@@ -17,5 +17,6 @@ routes.post('/', new LoginController().validSession);
 routes.get('/logout', new LoginController().logOut);
 
 routes.post('/cards/create', new CardsController().create);
+routes.post('/cards/remove', new CardsController().remove);
 
 export default routes;
