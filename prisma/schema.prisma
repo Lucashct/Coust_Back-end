@@ -39,6 +39,7 @@ model Card {
   name String
   dueDate Int
   limit Float
+  usedLimit Float @default(0)
   user User @relation(fields: [idUser], references: [id])
   idUser String
   @@map("cards")

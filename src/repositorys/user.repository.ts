@@ -28,8 +28,6 @@ export const getUser = async(data: any) => {
       cards: true
     }
   });
-  
-
 
   return user;
 }
