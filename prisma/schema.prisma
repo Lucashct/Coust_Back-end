@@ -30,6 +30,8 @@ model Bill {
   user User @relation(fields: [idUser], references: [id])
   idUser String
   entries Entrie[]
+  idCard String?
+  card Card? @relation(fields: [idCard], references: [id])
 
   @@map("bills")
 }
@@ -42,6 +44,7 @@ model Card {
   usedLimit Float @default(0)
   user User @relation(fields: [idUser], references: [id])
   idUser String
+  bills Bill[]
   @@map("cards")
 }
 
