@@ -11,7 +11,7 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-  origin: 'https://coust-back-end.onrender.com',
+  origin: 'https://coust.netlify.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
