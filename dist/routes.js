@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const GoogleAuth_controller_1 = __importDefault(require("./controllers/GoogleAuth.controller"));
+const ValidSession_1 = require("./middleware/ValidSession");
+const Login_controller_1 = __importDefault(require("./controllers/Login.controller"));
+const User_controller_1 = __importDefault(require("./controllers/User.controller"));
+const Cards_controller_1 = require("./controllers/Cards.controller");
+const routes = (0, express_1.Router)();
+routes.post('/verify/code', new GoogleAuth_controller_1.default().verifyToken);
+routes.post('/login', new Login_controller_1.default().login);
+routes.post('/user/create', new User_controller_1.default().createUser);
+routes.use(ValidSession_1.validSession);
+routes.post('/', new Login_controller_1.default().validSession);
+routes.get('/logout', new Login_controller_1.default().logOut);
+routes.post('/cards/create', new Cards_controller_1.CardsController().create);
+routes.post('/cards/remove', new Cards_controller_1.CardsController().remove);
+exports.default = routes;
