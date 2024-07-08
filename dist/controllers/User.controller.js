@@ -20,7 +20,8 @@ class UserController {
             res.cookie('token', jsonwebtoken_1.default.sign({ id: userCreated.id, email: userCreated.email }, (_a = process.env.JWT_PASS) !== null && _a !== void 0 ? _a : '', { expiresIn: '7d' }), {
                 httpOnly: true,
                 maxAge: 604800000,
-                secure: false,
+                secure: true,
+                sameSite: 'none'
             });
             res.json(new ResponseObject_1.ResponseObject(StatusResponse_1.StatusResponse.SUCCESS, 'Usuário criado com sucesso', null, loggedUser));
         }
