@@ -34,7 +34,8 @@ export default class GoogleAuthController {
         res.cookie('token', jwt.sign({ id: userCreated.id, email: userCreated.email }, process.env.JWT_PASS ?? '', { expiresIn: '7d' }), {
           httpOnly: true,
           maxAge:  604800000,
-          secure: false
+          secure: true,
+          sameSite: 'none'
         })
         res.json(new ResponseObject(StatusResponse.SUCCESS, 'Usuário criado com sucesso.', null, userCreated));
       } else {
@@ -45,7 +46,8 @@ export default class GoogleAuthController {
           res.cookie('token', jwt.sign({ id: userRecovered?.id, email: userRecovered?.email }, process.env.JWT_PASS ?? '', { expiresIn: '7d' }),{
             httpOnly: true,
             maxAge:  604800000,
-            secure: false
+            secure: true,
+            sameSite: 'none'
           })
           res.json(new ResponseObject(StatusResponse.SUCCESS, 'Login realizado com sucesso.', null, userRecovered));
         } else {

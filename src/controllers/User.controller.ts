@@ -24,7 +24,8 @@ export default class UserController {
       res.cookie('token', jwt.sign({ id: userCreated.id, email: userCreated.email }, process.env.JWT_PASS ?? '', { expiresIn: '7d' }), {
         httpOnly: true,
         maxAge: 604800000,
-        secure: false,
+        secure: true,
+        sameSite: 'none'
       });
       res.json(new ResponseObject(StatusResponse.SUCCESS, 'Usuário criado com sucesso', null, loggedUser));
     } catch(error) {

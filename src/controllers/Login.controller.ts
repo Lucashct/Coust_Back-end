@@ -32,7 +32,8 @@ export default class LoginController {
         .cookie('token', jwt.sign({ id: userRecovered?.id, email: userRecovered?.email }, process.env.JWT_PASS ?? '', { expiresIn: '7d' }), {
           httpOnly: true,
           maxAge: 604800000,
-          secure: false
+          secure: true,
+          sameSite: 'none'
         })
         .json(new ResponseObject(StatusResponse.SUCCESS, 'Login efetuado com sucesso', null, userToReturn));
       } else {
