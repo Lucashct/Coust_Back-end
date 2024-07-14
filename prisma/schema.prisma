@@ -17,6 +17,7 @@ model User {
   password String?
   bills Bill[]
   cards Card[]
+  entries Entrie[]
 
   @@map("users")
 }
@@ -52,8 +53,11 @@ model Entrie {
   id String @id @default(uuid())
   value Float
   dueDate DateTime
-  bill Bill @relation(fields: [idBill], references: [id])
   idBill String
+  bill Bill @relation(fields: [idBill], references: [id])
+  idUser String
+  user User @relation(fields: [idUser], references: [id])
+  
 
   @@map("entries")
 }
