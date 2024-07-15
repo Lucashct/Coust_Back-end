@@ -25,8 +25,10 @@ export const getUser = async(data: any) => {
       id: true,
       email: true,
       name: true,
-      cards: true
-    }
+      cards: true,
+      bills: true,
+      entries: true
+    },
   });
 
   return user;

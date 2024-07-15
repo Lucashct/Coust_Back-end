@@ -30,13 +30,15 @@ export default class GoogleAuthController {
       if(!user) {
         const userCreated = await createUser({ name: userPayload?.name, email: userPayload?.email });
 
+        const userToSendResponse = await getUser(userCreated);
+
         res.status(201)
         res.cookie('token', jwt.sign({ id: userCreated.id, email: userCreated.email }, process.env.JWT_PASS ?? '', { expiresIn: '7d' }), {
           httpOnly: true,
           maxAge:  604800000,
           secure: false
         })
-        res.json(new ResponseObject(StatusResponse.SUCCESS, 'Usuário criado com sucesso.', null, userCreated));
+        res.json(new ResponseObject(StatusResponse.SUCCESS, 'Usuário criado com sucesso.', null, userToSendResponse));
       } else {
         if(user.email == userPayload?.email) {
           const userRecovered = await getUser(user);
