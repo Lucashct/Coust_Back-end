@@ -30,7 +30,8 @@ class LoginController {
                     .cookie('token', jsonwebtoken_1.default.sign({ id: userRecovered === null || userRecovered === void 0 ? void 0 : userRecovered.id, email: userRecovered === null || userRecovered === void 0 ? void 0 : userRecovered.email }, (_b = process.env.JWT_PASS) !== null && _b !== void 0 ? _b : '', { expiresIn: '7d' }), {
                     httpOnly: true,
                     maxAge: 604800000,
-                    secure: false
+                    secure: true,
+                    sameSite: 'none'
                 })
                     .json(new ResponseObject_1.ResponseObject(StatusResponse_1.StatusResponse.SUCCESS, 'Login efetuado com sucesso', null, userToReturn));
             }
