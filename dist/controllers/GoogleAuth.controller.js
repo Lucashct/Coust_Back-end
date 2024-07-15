@@ -23,6 +23,7 @@ class GoogleAuthController {
             const user = await (0, user_repository_1.getUserByEmail)(userPayload === null || userPayload === void 0 ? void 0 : userPayload.email);
             if (!user) {
                 const userCreated = await (0, user_repository_1.createUser)({ name: userPayload === null || userPayload === void 0 ? void 0 : userPayload.name, email: userPayload === null || userPayload === void 0 ? void 0 : userPayload.email });
+                const userToSendResponse = await (0, user_repository_1.getUser)(userCreated);
                 res.status(201);
                 res.cookie('token', jsonwebtoken_1.default.sign({ id: userCreated.id, email: userCreated.email }, (_a = process.env.JWT_PASS) !== null && _a !== void 0 ? _a : '', { expiresIn: '7d' }), {
                     httpOnly: true,
@@ -30,7 +31,7 @@ class GoogleAuthController {
                     secure: true,
                     sameSite: 'none'
                 });
-                res.json(new ResponseObject_1.ResponseObject(StatusResponse_1.StatusResponse.SUCCESS, 'Usuário criado com sucesso.', null, userCreated));
+                res.json(new ResponseObject_1.ResponseObject(StatusResponse_1.StatusResponse.SUCCESS, 'Usuário criado com sucesso.', null, userToSendResponse));
             }
             else {
                 if (user.email == (userPayload === null || userPayload === void 0 ? void 0 : userPayload.email)) {

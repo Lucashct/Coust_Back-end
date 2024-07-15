@@ -25,8 +25,10 @@ const getUser = async (data) => {
             id: true,
             email: true,
             name: true,
-            cards: true
-        }
+            cards: true,
+            bills: true,
+            entries: true
+        },
     });
     return user;
 };
